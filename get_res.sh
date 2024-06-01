@@ -6,6 +6,6 @@ if [ ! -d res ]; then
 fi
 
 # Download file and put it in res
-wget http://oaei.webdatacommons.org/tdrs/testdata/persistent/knowledgegraph/v3/suite/starwars-swtor/component/target/ -O res/oldRepubl.xml
-wget http://oaei.webdatacommons.org/tdrs/testdata/persistent/knowledgegraph/v3/suite/starwars-swg/component/target/ -O res/starWarGalax.xml
-
+wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/confOf.owl -O res/confOf.owl
+wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/ekaw.owl -O res/ekaw.owl
+wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/confOf-ekaw-reference-mappings.ttl -O res/confOf-ekaw-reference-mappings.ttl
