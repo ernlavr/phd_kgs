@@ -7,7 +7,12 @@ def main():
 
     kg_1 = OntologyLoader(args.input)
     kg_2 = OntologyLoader(args.input2)
-    bs.get_class_alignment(kg_1, kg_2, args.output)
+
+    match args.algorithm:
+        case "baseline":
+            bs.get_class_alignment(kg_1, kg_2, args.output)
+        case _:
+            print("No algorithm specified")
     
 
 if __name__ == '__main__':
