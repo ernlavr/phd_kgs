@@ -4,6 +4,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import os
 import numpy as np
+from sklearn.decomposition import PCA
+
 
 def _try_get_cached_model(path):
     try:
@@ -43,18 +45,30 @@ def get_class_alignment(kg_1, kg_2, output):
     df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
 
-    pairwise_matrix = cosine_similarity(df_kg1, df_kg2)
+    kg1PC = get_pca(df_kg1, 10)
+    kg2PC = get_pca(df_kg2, 10)
 
-    for i, kg2_row in enumerate(pairwise_matrix):
+
+    pairwise_matrix = cosine_similarity(df_kg1, df_kg2)
+    pairwise_matrix_cossim_PC = cosine_similarity(kg1PC, kg2PC)
+
+
+    for i, kg2_row in enumerate(pairwise_matrix_cossim_PC):
         # get kg2_row all indices that are above 0.9
-        indices = np.where(kg2_row > 0.7)
+        indices = np.where(kg2_row > 0.9)
         if len(indices[0]) == 0:
             continue
 
         max_idx = max(indices[0])
         kg1_class = df_kg1.iloc[i].name
         kg2_class = df_kg2.iloc[max_idx].name
-        print(f"{kg1_class} -> {kg2_class}")
+        print(f"{kg1_class} -> {kg2_class} - {kg2_row[max_idx]}")
 
     pass
+
+def get_pca(df, dim=20):
+    pca = PCA(n_components=dim)
+    principalComponents = pca.fit_transform(df)
+    principalDf = pd.DataFrame(data = principalComponents)
+    return principalDf
 
