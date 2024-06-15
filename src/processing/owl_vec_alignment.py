@@ -47,8 +47,8 @@ def get_class_alignment(kg_1, kg_2, output):
     df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
 
-    kg1PC = get_pca(df_kg1, 5)
-    kg2PC = get_pca(df_kg2, 5)
+    kg1PC = get_pca(df_kg1, 30)
+    kg2PC = get_pca(df_kg2, 30)
 
 
     pairwise_matrix = cosine_similarity(df_kg1, df_kg2)
@@ -57,7 +57,7 @@ def get_class_alignment(kg_1, kg_2, output):
 
     for i, kg2_row in enumerate(pairwise_matrix_cossim_PC):
         # get kg2_row all indices that are above 0.9
-        indices = np.where(kg2_row > 0.95)
+        indices = np.where(kg2_row > 0.8)
         if len(indices[0]) == 0:
             continue
 
@@ -71,8 +71,10 @@ def get_class_alignment(kg_1, kg_2, output):
 def get_pca(df, dim):
     scaler = StandardScaler()
     scaled_df = scaler.fit_transform(df)
+    #print (scaled_df[1].mean(), scaled_df[1].std())
     pca = PCA(n_components=dim)
     principalComponents = pca.fit_transform(scaled_df)
     principalDf = pd.DataFrame(data = principalComponents)
+    print(pca.explained_variance_ratio_.sum(), "Cumulative Variance Ratio")
     return principalDf
 
