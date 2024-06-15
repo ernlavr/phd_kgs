@@ -3,7 +3,7 @@ from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import os
-
+import numpy as np
 
 def _try_get_cached_model(path):
     try:
@@ -45,6 +45,16 @@ def get_class_alignment(kg_1, kg_2, output):
 
     pairwise_matrix = cosine_similarity(df_kg1, df_kg2)
 
+    for i, kg2_row in enumerate(pairwise_matrix):
+        # get kg2_row all indices that are above 0.9
+        indices = np.where(kg2_row > 0.7)
+        if len(indices[0]) == 0:
+            continue
+
+        max_idx = max(indices[0])
+        kg1_class = df_kg1.iloc[i].name
+        kg2_class = df_kg2.iloc[max_idx].name
+        print(f"{kg1_class} -> {kg2_class}")
 
     pass
 
