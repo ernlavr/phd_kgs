@@ -1,5 +1,7 @@
 output/
 res/ 
+.vscode/
+cache/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
