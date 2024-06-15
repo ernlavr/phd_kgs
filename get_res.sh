@@ -9,3 +9,5 @@ fi
 wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/confOf.owl -O res/confOf.owl
 wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/ekaw.owl -O res/ekaw.owl
 wget https://raw.githubusercontent.com/city-knowledge-graphs/phd-course/main/python/lab-session3/data/confOf-ekaw-reference-mappings.ttl -O res/confOf-ekaw-reference-mappings.ttl
+
+wget https://raw.githubusercontent.com/KRR-Oxford/OWL2Vec-Star/master/default.cfg -O res/default.cfg

@@ -5,10 +5,19 @@ Created on 19 Jan 2021
 '''
 from owlready2 import *
 from rdflib import Graph
+import os
 
 class OntologyLoader():
     def __init__(self, path):
+        self.path = path
         self.onto = get_ontology(path).load()
+
+    def getName(self):
+        path = self.getPath()
+        return os.path.basename(path).split('.')[0]
+
+    def getPath(self):
+        return self.path
 
     def getClasses(self):        
         return self.onto.classes()
