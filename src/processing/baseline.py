@@ -1,4 +1,4 @@
-import Levenshtein as lev 
+
 from src.utils.isub import isub
 from src.utils.ontoloty_loader import OntologyLoader
 from rdflib import Graph
