@@ -1,3 +1,4 @@
+from rdflib import OWL, Graph
 from owl2vec_star import owl2vec_star as o2v
 from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
@@ -6,6 +7,7 @@ import os
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from tqdm import tqdm
 
 
 
@@ -60,8 +62,10 @@ def get_class_alignment(kg_1, kg_2, output):
     props_kg2, classes_kg2 = get_properties_classes(model_kg_2)
 
 
-    equal_classes = _compute_cosines(classes_kg1, classes_kg2, 0.8)
-    equal_props = _compute_cosines(props_kg1, props_kg2, 0.8)
+    equal_classes = _compute_cosines(classes_kg1, classes_kg2, 0.5)
+    equal_props = _compute_cosines(props_kg1, props_kg2, 0.5)
+
+    serialize_into_graph(equal_classes, equal_props, output)
     
     df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
@@ -86,6 +90,21 @@ def get_class_alignment(kg_1, kg_2, output):
         print(f"{kg1_class} -> {kg2_class} - {kg2_row[max_idx]}")
 
     pass
+
+def serialize_into_graph(equal_classes, equal_properties, output_name):
+    g = Graph()
+    # Pair-wise compare classes
+    for i in tqdm(equal_classes, "Classes.."):
+        g.add((i[0], OWL.equivalentClass, i[1]))
+        
+    for i in tqdm(equal_properties, "Properties.."):
+        g.add((i[0], OWL.equivalentClass, i[1]))
+    
+    # check if output_name folder exists
+    os.makedirs(os.path.dirname(output_name), exist_ok=True)
+    g.serialize(destination=output_name, format='ttl')
+    return g
+
 
 def get_pca(df, dim):
     scaler = StandardScaler()
