@@ -1,36 +1,60 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
-<http://ekaw#Agency_Staff_Member> owl:equivalentClass <http://confOf#Participant>,
+<http://ekaw#Academic_Institution> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
+
+<http://ekaw#Agency_Staff_Member> owl:equivalentClass <http://confOf#Chair_PC>,
+        <http://confOf#Member>,
+        <http://confOf#Regular>,
+        <http://confOf#Science_Worker> .
+
+<http://ekaw#Demo_Session> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Student> .
+
+<http://ekaw#Invited_Speaker> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
+
+<http://ekaw#OC_Chair> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
+
+<http://ekaw#Organising_Agency> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
+
+<http://ekaw#Paper_Author> owl:equivalentClass <http://confOf#Member>,
         <http://confOf#Regular> .
 
-<http://ekaw#Conference_Banquet> owl:equivalentClass <http://confOf#Reception> .
+<http://ekaw#Proceedings_Publisher> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
 
-<http://ekaw#Early-Registered_Participant> owl:equivalentClass <http://confOf#Member>,
-        <http://confOf#Regular> .
+<http://ekaw#Research_Institute> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
 
-<http://ekaw#Event> owl:equivalentClass <http://confOf#Reception> .
+<http://ekaw#SC_Member> owl:equivalentClass <http://confOf#Student> .
 
-<http://ekaw#Invited_Speaker> owl:equivalentClass <http://confOf#Conference> .
+<http://ekaw#Social_Event> owl:equivalentClass <http://confOf#Reception>,
+        <http://confOf#Social_event> .
 
-<http://ekaw#Invited_Talk> owl:equivalentClass <http://confOf#Conference> .
+<http://ekaw#University> owl:equivalentClass <http://confOf#Assistant>,
+        <http://confOf#Camera_Ready_event>,
+        <http://confOf#Company>,
+        <http://confOf#Student> .
 
-<http://ekaw#OC_Member> owl:equivalentClass <http://confOf#Member>,
-        <http://confOf#Regular> .
+<http://ekaw#Workshop_Session> owl:equivalentClass <http://confOf#Camera_Ready_event> .
 
-<http://ekaw#Organisation> owl:equivalentClass <http://confOf#Conference> .
+<http://ekaw#locationOf> owl:equivalentProperty <http://confOf#hasFirstName>,
+        <http://confOf#writtenBy> .
 
-<http://ekaw#Poster_Session> owl:equivalentClass <http://confOf#Conference> .
-
-<http://ekaw#Regular_Session> owl:equivalentClass <http://confOf#Conference> .
-
-<http://ekaw#Research_Institute> owl:equivalentClass <http://confOf#Conference> .
-
-<http://ekaw#Social_Event> owl:equivalentClass <http://confOf#Social_event> .
-
-<http://ekaw#Tutorial> owl:equivalentClass <http://confOf#Conference> .
-
-<http://ekaw#Tutorial_Abstract> owl:equivalentClass <http://confOf#Conference>,
-        <http://confOf#Reception> .
-
-<http://ekaw#University> owl:equivalentClass <http://confOf#Conference> .
+<http://ekaw#paperPresentedAs> owl:equivalentProperty <http://confOf#writtenBy> .
 
