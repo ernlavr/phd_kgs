@@ -27,7 +27,7 @@ Baseline algorithm is based on string similarity and uses `isub` library for per
 
 ## Embedding-based algorithm
 
-Based on the `Owl2Vec` library, the algorithm is implemented in `src/owl_vec_alignment.py` file. Ensure to have the Word2Vec model downloaded and placed in the `./res/` folder and specify the path in the default .cfg-file in `./res/`.
+Based on the `Owl2Vec` library, the algorithm is implemented in `src/owl_vec_alignment.py` file. Ensure to have the Word2Vec model downloaded and placed in the `./res/` folder and specify the path in the `./res/default_kg1.cfg` and `./res/default_kg1.cfg` files under `pre_train_model` variable.
 
 1. Run it with `python3 main.py -a owl2vec -o output/owl2vec_algn.ttl`
 2. Output will be saved in the `output/` folder
