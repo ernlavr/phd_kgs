@@ -43,13 +43,13 @@ def get_properties_classes(model):
     return properties, classes
 
 def _compute_cosines(kg1, kg2, threshold):
-    cosines = []
+    equals = []
     for kg1_k, kg1_v in kg1.items():
         for kg2_k, kg2_v in kg2.items():
             sim = cosine_similarity([kg1_v], [kg2_v])[0][0]
             if sim > threshold:
-                print(f"{kg1_k} -> {kg2_k}")
-    return np.array(cosines)
+                equals.append((kg1_k, kg2_k))
+    return equals
 
 def get_class_alignment(kg_1, kg_2, output):
     print("Implement owl2vec")
@@ -60,8 +60,8 @@ def get_class_alignment(kg_1, kg_2, output):
     props_kg2, classes_kg2 = get_properties_classes(model_kg_2)
 
 
-    _compute_cosines(classes_kg1, classes_kg2, 0.59)
-    _compute_cosines(props_kg1, props_kg2, 0.59)
+    equal_classes = _compute_cosines(classes_kg1, classes_kg2, 0.8)
+    equal_props = _compute_cosines(props_kg1, props_kg2, 0.8)
     
     df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
