@@ -15,34 +15,53 @@ def _try_get_cached_model(path):
     except FileNotFoundError:
         return None
     
-def get_embeddings(kg, recompute=False):
+def get_embeddings(kg, config, recompute=False):
     os.makedirs("output", exist_ok=True)
     cached = _try_get_cached_model(os.path.join("output", f"{kg.getName()}_ontology.embeddings"))
     if cached is not None and recompute is False:
         return cached
 
-    model = o2v.extract_owl2vec_model(kg.path, "res/default.cfg", True, True, True)
+    model = o2v.extract_owl2vec_model(kg.path, config, True, True, True)
     model.save(os.path.join("output", f"{kg.getName()}_ontology.embeddings"))
     return model
 
+def get_properties_classes(model):
+    wv = model.wv
+    properties = {}
+    classes = {}
+    for key in wv.index_to_key:
+        # Avoid RDF schemas
+        if 'rdf-schema' in key or 'owl' in key: 
+            continue
 
+        s = key.split('#')
+        if len(s) > 1:
+            if s[-1][0].isupper(): # first char of the split http://xx#Yyy is uppercase
+                classes[key] = wv.get_vector(key)
+            else:
+                properties[key] = wv.get_vector(key)
+    return properties, classes
+
+def _compute_cosines(kg1, kg2, threshold):
+    cosines = []
+    for kg1_k, kg1_v in kg1.items():
+        for kg2_k, kg2_v in kg2.items():
+            sim = cosine_similarity([kg1_v], [kg2_v])[0][0]
+            if sim > threshold:
+                print(f"{kg1_k} -> {kg2_k}")
+    return np.array(cosines)
 
 def get_class_alignment(kg_1, kg_2, output):
     print("Implement owl2vec")
-    model_kg_1 = get_embeddings(kg_1)
-    model_kg_2 = get_embeddings(kg_2)
+    model_kg_1 = get_embeddings(kg_1, "res/default_kg1.cfg")
+    model_kg_2 = get_embeddings(kg_2, "res/default_kg2.cfg")
 
-    wv1 = model_kg_1.wv
+    props_kg1, classes_kg1 = get_properties_classes(model_kg_1)
+    props_kg2, classes_kg2 = get_properties_classes(model_kg_2)
 
-    wv2 = model_kg_2.wv
 
-    embedding_dict_kg_1 = {}
-    for key in wv1.index_to_key:
-        embedding_dict_kg_1[key] = wv1.get_vector(key)
-
-    embedding_dict_kg_2 = {}
-    for key in wv2.index_to_key:
-        embedding_dict_kg_2[key] = wv2.get_vector(key)
+    _compute_cosines(classes_kg1, classes_kg2, 0.59)
+    _compute_cosines(props_kg1, props_kg2, 0.59)
     
     df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
