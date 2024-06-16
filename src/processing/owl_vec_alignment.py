@@ -1,4 +1,4 @@
-from rdflib import OWL, Graph
+from rdflib import OWL, Graph, URIRef
 from owl2vec_star import owl2vec_star as o2v
 from gensim.models import KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
@@ -62,12 +62,12 @@ def get_class_alignment(kg_1, kg_2, output):
     props_kg2, classes_kg2 = get_properties_classes(model_kg_2)
 
 
-    equal_classes = _compute_cosines(classes_kg1, classes_kg2, 0.5)
-    equal_props = _compute_cosines(props_kg1, props_kg2, 0.5)
+    equal_classes = _compute_cosines(classes_kg1, classes_kg2, 0.8)
+    equal_props = _compute_cosines(props_kg1, props_kg2, 0.8)
 
     serialize_into_graph(equal_classes, equal_props, output)
     
-    df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
+    """df_kg1 = pd.DataFrame.from_dict(embedding_dict_kg_1, orient='index')
     df_kg2 = pd.DataFrame.from_dict(embedding_dict_kg_2, orient='index')
 
     kg1PC = get_pca(df_kg1, 30)
@@ -87,7 +87,7 @@ def get_class_alignment(kg_1, kg_2, output):
         max_idx = max(indices[0])
         kg1_class = df_kg1.iloc[i].name
         kg2_class = df_kg2.iloc[max_idx].name
-        print(f"{kg1_class} -> {kg2_class} - {kg2_row[max_idx]}")
+        print(f"{kg1_class} -> {kg2_class} - {kg2_row[max_idx]}")"""
 
     pass
 
@@ -95,10 +95,14 @@ def serialize_into_graph(equal_classes, equal_properties, output_name):
     g = Graph()
     # Pair-wise compare classes
     for i in tqdm(equal_classes, "Classes.."):
-        g.add((i[0], OWL.equivalentClass, i[1]))
+        rdf_term1 = URIRef(i[0])
+        rdf_term2 = URIRef(i[1])
+        g.add((rdf_term1, OWL.equivalentClass, rdf_term2))
         
     for i in tqdm(equal_properties, "Properties.."):
-        g.add((i[0], OWL.equivalentClass, i[1]))
+        rdf_term1 = URIRef(i[0])
+        rdf_term2 = URIRef(i[1])
+        g.add((rdf_term1, OWL.equivalentProperty, rdf_term2))
     
     # check if output_name folder exists
     os.makedirs(os.path.dirname(output_name), exist_ok=True)
