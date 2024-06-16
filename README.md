@@ -2,6 +2,13 @@
 
 PhD Course submission. Ran and tested on Ubuntu 22, Python 3.10
 
+## RESULTS
+
+The serialized results we've computed are located in the output folder. One for each alignment model.
+
+1. baseline_align.ttl
+2. owl2vec_aling.ttl
+
 ## Prerequisites
 
 Available command-line arguments are in `src/utils/utils.py`, or `python3 main.py -h`
