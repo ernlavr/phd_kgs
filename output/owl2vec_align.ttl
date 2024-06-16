@@ -1,0 +1,36 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<http://ekaw#Agency_Staff_Member> owl:equivalentClass <http://confOf#Participant>,
+        <http://confOf#Regular> .
+
+<http://ekaw#Conference_Banquet> owl:equivalentClass <http://confOf#Reception> .
+
+<http://ekaw#Early-Registered_Participant> owl:equivalentClass <http://confOf#Member>,
+        <http://confOf#Regular> .
+
+<http://ekaw#Event> owl:equivalentClass <http://confOf#Reception> .
+
+<http://ekaw#Invited_Speaker> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Invited_Talk> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#OC_Member> owl:equivalentClass <http://confOf#Member>,
+        <http://confOf#Regular> .
+
+<http://ekaw#Organisation> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Poster_Session> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Regular_Session> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Research_Institute> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Social_Event> owl:equivalentClass <http://confOf#Social_event> .
+
+<http://ekaw#Tutorial> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Tutorial_Abstract> owl:equivalentClass <http://confOf#Conference>,
+        <http://confOf#Reception> .
+
+<http://ekaw#University> owl:equivalentClass <http://confOf#Conference> .
+

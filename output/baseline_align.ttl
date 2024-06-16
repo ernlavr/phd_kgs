@@ -1,0 +1,44 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<http://ekaw#Conference> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Conference_Banquet> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Conference_Paper> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Conference_Session> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Conference_Trip> owl:equivalentClass <http://confOf#Conference> .
+
+<http://ekaw#Event> owl:equivalentClass <http://confOf#Event> .
+
+<http://ekaw#Organisation> owl:equivalentClass <http://confOf#Organization> .
+
+<http://ekaw#PC_Chair> owl:equivalentClass <http://confOf#Chair_PC> .
+
+<http://ekaw#PC_Member> owl:equivalentClass <http://confOf#Member_PC> .
+
+<http://ekaw#Paper> owl:equivalentClass <http://confOf#Paper> .
+
+<http://ekaw#Person> owl:equivalentClass <http://confOf#Person> .
+
+<http://ekaw#Regular_Paper> owl:equivalentClass <http://confOf#Regular> .
+
+<http://ekaw#Social_Event> owl:equivalentClass <http://confOf#Social_event> .
+
+<http://ekaw#Student> owl:equivalentClass <http://confOf#Student> .
+
+<http://ekaw#Tutorial> owl:equivalentClass <http://confOf#Tutorial> .
+
+<http://ekaw#Tutorial_Chair> owl:equivalentClass <http://confOf#Tutorial> .
+
+<http://ekaw#University> owl:equivalentClass <http://confOf#University> .
+
+<http://ekaw#Workshop> owl:equivalentClass <http://confOf#Workshop> .
+
+<http://ekaw#Workshop_Chair> owl:equivalentClass <http://confOf#Workshop> .
+
+<http://ekaw#Workshop_Paper> owl:equivalentClass <http://confOf#Workshop> .
+
+<http://ekaw#writtenBy> owl:equivalentProperty <http://confOf#writtenBy> .
+
